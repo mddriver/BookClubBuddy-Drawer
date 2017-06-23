@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        //Set the default view.
+        changeFragment(0);
     }
 
     @Override
@@ -92,38 +94,31 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.current_books_option) {
+
             // Create a new fragment and set the option number
-            OptionsFragment fragment = new OptionsFragment();
-            Bundle args = new Bundle();
-            args.putInt(OptionsFragment.ARG_OPTION_NUMBER, 0);
-            fragment.setArguments(args);
-
-            // Insert the fragment by replacing any existing fragment
-
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-
-            // Close the drawer
-            onBackPressed();
+            changeFragment(0);
 
         } else if (id == R.id.new_book_option) {
 
             // Create a new fragment and set the option number
-            OptionsFragment fragment = new OptionsFragment();
-            Bundle args = new Bundle();
-            args.putInt(OptionsFragment.ARG_OPTION_NUMBER, 1);
-            fragment.setArguments(args);
-
-            // Insert the fragment by replacing any existing fragment
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
-
-            // Close the drawer.
-            onBackPressed();
+            changeFragment(1);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void changeFragment(int value) {
+        OptionsFragment fragment = new OptionsFragment();
+        Bundle args = new Bundle();
+        args.putInt(OptionsFragment.ARG_OPTION_NUMBER, value);
+        fragment.setArguments(args);
+
+        // Insert the fragment by replacing any existing fragment
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.content_main, fragment).commit();
+
     }
 }
