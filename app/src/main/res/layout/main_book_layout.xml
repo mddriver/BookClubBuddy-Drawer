@@ -8,19 +8,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/bookTitle"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
         android:textSize="20sp"
-        text="The Princess Bride: S. Morgenstern's Classic Tale of True Love and High Adventure "/>
+        android:text="The Princess Bride: S. Morgenstern's Classic Tale of True Love and High Adventure "/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/author"
-        text="By: Margaret Mitchell"/>
+        android:text="By: Margaret Mitchell"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,8 +43,16 @@
             android:textSize="16sp"
             tools:text="Finish By: 12/31/2018"/>
 
+
     </LinearLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/pagesRead"
+        android:textSize="20sp"
+        android:gravity="center"
+        tools:text="You've read 1343 pages so far."/>
 
     <TextView
         android:layout_width="match_parent"
@@ -53,6 +61,38 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:gravity="center"
-        tools:text="182 pages for the next 323 days."/>
+        tools:text="You need to read 182 pages for the next 323 days."/>
 
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                tools:text="192"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/pagesEditText"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pages Read"
+            android:id="@+id/addPagesButton"
+            android:layout_gravity="center"/>
+
+        </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit Book"
+            android:id="@+id/editBookButton"/>
+
+    </LinearLayout>
 </LinearLayout>

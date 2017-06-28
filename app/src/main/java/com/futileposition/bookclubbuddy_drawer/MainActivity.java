@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity
 
     private ActionBarDrawerToggle mDrawerToggle;
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    public static RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     public RecyclerView mBooksReadingRecyclerView;
     private SqlBookDatabase bookDB;

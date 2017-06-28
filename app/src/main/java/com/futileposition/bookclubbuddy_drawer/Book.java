@@ -9,6 +9,8 @@ import org.joda.time.Days;
  */
 
 class Book {
+
+
     private String mTitle;
     private String mAuthor;
     private DateTime mDateStarted;
@@ -121,4 +123,5 @@ class Book {
     public void setPagesRead(int mPagesRead) {
         this.mPagesRead = mPagesRead;
     }
+
 }

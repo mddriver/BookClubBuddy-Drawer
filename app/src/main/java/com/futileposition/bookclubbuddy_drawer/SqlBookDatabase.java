@@ -27,6 +27,7 @@ public class SqlBookDatabase extends SQLiteOpenHelper {
     public static final String COLUMN_NAME_PAGES = "PAGES";
     public static final String COLUMN_NAME_START_DATE = "START_DATE";
     public static final String COLUMN_NAME_GOAL_DATE = "GOAL_DATE";
+    public static final String COLUMN_NAME_PAGES_READ = "PAGES_READ";
     public static final int DATABASE_VERSION = 1;
 
     @Override
@@ -41,7 +42,8 @@ public class SqlBookDatabase extends SQLiteOpenHelper {
                     COLUMN_NAME_AUTHOR + " TEXT," +
                     COLUMN_NAME_PAGES + " INTEGER," +
                     COLUMN_NAME_START_DATE + " DATE," +
-                    COLUMN_NAME_GOAL_DATE + " DATE)";
+                    COLUMN_NAME_GOAL_DATE + " DATE," +
+                    COLUMN_NAME_PAGES_READ + " INTEGER)";
 
     public SqlBookDatabase(Context context) {
         super(context, TABLE_NAME, null, DATABASE_VERSION);
@@ -68,13 +70,18 @@ public class SqlBookDatabase extends SQLiteOpenHelper {
         values.put(SqlBookDatabase.COLUMN_NAME_PAGES, pages);
         values.put(SqlBookDatabase.COLUMN_NAME_START_DATE, start_date);
         values.put(SqlBookDatabase.COLUMN_NAME_GOAL_DATE, end_date);
+        values.put(SqlBookDatabase.COLUMN_NAME_PAGES_READ, 0);
         db.insert(TABLE_NAME,
                 null,
                 values);
         db.close();
     }
 
-
-
-
+    public static void setPages(Context context, int pages, int rowId) {
+        SqlBookDatabase dBHelper = new SqlBookDatabase(context);
+        SQLiteDatabase db = dBHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SqlBookDatabase.COLUMN_NAME_PAGES_READ, pages);
+        db.update(TABLE_NAME, values, BaseColumns._ID + "= " + rowId, null);
+    }
 }

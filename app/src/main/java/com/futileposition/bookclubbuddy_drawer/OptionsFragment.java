@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import org.joda.time.DateTime;
@@ -28,11 +29,18 @@ import static com.futileposition.bookclubbuddy_drawer.SqlBookDatabase.TABLE_NAME
  * Created by MD on 6/21/2017.
  */
 
-public class OptionsFragment extends Fragment {
+public class OptionsFragment extends Fragment  {
     public static final String ARG_OPTION_NUMBER = "option_number";
     private MainBookAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
+
     private Button mSubmitButton;
+
+
+
+    public interface OnBookSelectedInterface {
+        void onBookRecipeSelected(int index);
+    }
 
     public OptionsFragment() {
         // Empty constructor required for fragment subclasses
@@ -46,6 +54,7 @@ public class OptionsFragment extends Fragment {
         if(i == 0) {
             //TO FIX: SET THIS TO SHOW CURRENT BOOKS
             rootView = inflater.inflate(R.layout.view_current_book, container, false);
+
             getActivity().setTitle("Book Club Buddy");
 
             RecyclerView mBooksReadingRecyclerView = (RecyclerView) rootView.findViewById(R.id.current_books_recycler_view);
@@ -73,6 +82,7 @@ public class OptionsFragment extends Fragment {
                 DateTimeFormatter timeFormat = DateTimeFormat.forPattern("yyyy-MM-dd");
                 tempBook.setDateStarted(timeFormat.parseDateTime(cursor.getString(4)));
                 tempBook.setDateToFinish(timeFormat.parseDateTime(cursor.getString(5)));
+                tempBook.setPagesRead(cursor.getInt(6));
                 books.add(tempBook);
             }
             cursor.close();
@@ -89,6 +99,7 @@ public class OptionsFragment extends Fragment {
             rootView = inflater.inflate(R.layout.content_new_book, container, false);
             mSubmitButton = (Button) rootView.findViewById(R.id.submitNewBook);
             final View finalRootView = rootView;
+
             mSubmitButton.setOnClickListener(new View.OnClickListener()
             {
                 @Override
